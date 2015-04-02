@@ -38,7 +38,7 @@ module MyApp
 
     def parsed_json_payload
       request.body.rewind
-      @payload = JSON.parse request.body.read
+      @parsed_json_payload = JSON.parse request.body.read
     rescue JSON::ParserError
       halt 400, 'invalid JSON'
     end
