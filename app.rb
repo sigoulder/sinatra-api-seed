@@ -18,5 +18,6 @@ module MyApp
     use ActiveRecord::ConnectionAdapters::ConnectionManagement
 
     use UsersController
+    use AuthController
   end
 end

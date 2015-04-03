@@ -4,12 +4,13 @@
 #############################
 class Auth
   def self.create_token user, expire_days = nil
-    expire_days ||= ENV['AUTH_TOKEN_EXPIRE_DAYS']
+    expire_days ||= ENV['AUTH_TOKEN_EXPIRE_DAYS'] || 14.days
 
     payload = { 'sub': user.id,
                 'iat': Time.now.to_i,
                 'exp': (Time.now + expire_days.to_i.days).to_i }
 
+    raise "can't find ENV['AUTH_TOKEN_SECRET']" unless ENV['AUTH_TOKEN_SECRET']
     JWT.encode(payload, ENV['AUTH_TOKEN_SECRET'])
   end
 

@@ -50,8 +50,8 @@ module MyApp
       handle_unauthorized(message) unless @current_user
     end
 
-    def handle_unauthorized message
-      halt 403, 'unauthorized:' + message
+    def handle_unauthorized message = nil
+      halt 403, "unauthorized:#{message}"
     end
   end
 end
