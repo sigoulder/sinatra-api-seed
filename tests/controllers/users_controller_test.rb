@@ -36,8 +36,6 @@ class MyApp::UsersControllerTest < Minitest::Test
   end
 
   def test_create_user_success
-    @user.destroy
-
     post @base_url, attributes_for(:user).to_json
     assert_equal 201, last_response.status
 
