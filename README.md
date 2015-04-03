@@ -15,6 +15,6 @@ Goto home directory and run: `irb -r './app'`
 `rake test:all`
 
 ## Existing Routes
-- `POST /users` with `email, password` to create a new user
-- `POST /auth` with `email, password` to get auth token
+- `POST /users` with `email` and `password` to create a new user
+- `POST /auth` with `email` and `password` to get auth token
 - `GET /users/:id` with auth token to retrieve user info
