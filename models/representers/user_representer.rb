@@ -12,4 +12,5 @@ module UserRepresenter
   property :updated_at, writeable: false
 
   property :email
+  property :password, readable: false
 end
