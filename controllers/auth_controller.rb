@@ -4,9 +4,9 @@
 #############################
 module MyApp
   class AuthController < ApplicationController
-    BASE_URL = '/auth'.freeze
+    BASE_URL = '/auth/'.freeze
 
-    post BASE_URL + '/?' do
+    post BASE_URL + '?' do
       email = parsed_json_payload['email']
       password = parsed_json_payload['password']
 
