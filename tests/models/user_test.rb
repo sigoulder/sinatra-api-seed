@@ -8,6 +8,8 @@ class MyApp::UserTest < Minitest::Test
   include ModelTests
 
   def setup
+    super
+
     @model = build :user
   end
 end

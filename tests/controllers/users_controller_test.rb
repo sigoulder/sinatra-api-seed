@@ -6,18 +6,16 @@ require_relative '../test_helper'
 
 class MyApp::UsersControllerTest < Minitest::Test
   def setup
+    super
+
     @user = create :user
     @base_url = MyApp::UsersController::BASE_URL
-  end
-
-  def teardown
-    @user.destroy if @user
   end
 
   def test_get_with_id_success
     sign_in @user
 
-    get @base_url + '/' + @user.id.to_s
+    get @base_url + @user.id.to_s
     assert last_response.ok?
 
     parsed_resp = JSON.parse last_response.body
@@ -29,10 +27,15 @@ class MyApp::UsersControllerTest < Minitest::Test
   def test_get_with_id_not_found
     sign_in @user
 
-    get @base_url + '/' + 'foobar'
+    get @base_url + 'foobar'
 
-    assert_equal 404, last_response.status
-    assert_equal 'not found', last_response.body
+    assert_not_found
+  end
+
+  def test_get_with_id_unauthorized
+    get @base_url + 'foobar'
+
+    assert_unauthorized
   end
 
   def test_create_user_success

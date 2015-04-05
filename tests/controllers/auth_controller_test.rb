@@ -6,14 +6,12 @@ require_relative '../test_helper'
 
 class MyApp::AuthControllerTest < Minitest::Test
   def setup
+    super
+
     @user = create :user
     @base_url = MyApp::AuthController::BASE_URL
 
     @payload = { email: @user.email }
-  end
-
-  def teardown
-    @user.destroy
   end
 
   def test_get_token_success
@@ -29,13 +27,13 @@ class MyApp::AuthControllerTest < Minitest::Test
   def test_get_token_fail_no_password
     post @base_url, @payload.to_json
 
-    assert_equal 403, last_response.status
+    assert_unauthorized
   end
 
   def test_get_token_fail_wrong_password
     @payload[:password] = @user.password + 'foobar'
     post @base_url, @payload.to_json
 
-    assert_equal 403, last_response.status
+    assert_unauthorized
   end
 end

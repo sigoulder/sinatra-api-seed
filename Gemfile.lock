@@ -19,6 +19,7 @@ GEM
     bcrypt (3.1.10)
     builder (3.2.2)
     daemons (1.1.9)
+    database_cleaner (1.4.1)
     dotenv (1.0.2)
     eventmachine (1.0.7)
     factory_girl (4.5.0)
@@ -79,6 +80,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord (~> 4.2.0)
   bcrypt (~> 3.1.10)
+  database_cleaner
   dotenv (~> 1.0.2)
   factory_girl (~> 4.0)
   jwt (~> 1.4.1)

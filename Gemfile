@@ -20,4 +20,5 @@ group :test do
   gem 'rack-test'
   gem 'factory_girl', '~> 4.0'
   gem 'mocha'
+  gem 'database_cleaner'
 end
