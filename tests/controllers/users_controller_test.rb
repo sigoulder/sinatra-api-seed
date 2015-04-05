@@ -16,12 +16,10 @@ class MyApp::UsersControllerTest < Minitest::Test
     sign_in @user
 
     get @base_url + @user.id.to_s
+
     assert last_response.ok?
 
-    parsed_resp = JSON.parse last_response.body
-
-    assert_equal @user.id, parsed_resp['id']
-    assert_equal @user.email, parsed_resp['email']
+    assert_valid_user_response(@user_id)
   end
 
   def test_get_with_id_not_found
@@ -43,7 +41,8 @@ class MyApp::UsersControllerTest < Minitest::Test
     assert_equal 201, last_response.status
 
     parsed_resp = JSON.parse last_response.body
-    refute_nil parsed_resp['id']
+
+    assert_valid_user_response
   end
 
   def test_create_user_fail
@@ -54,5 +53,19 @@ class MyApp::UsersControllerTest < Minitest::Test
 
     assert_equal ["can't be blank"], parsed_resp['email']
     assert_equal ["can't be blank"], parsed_resp['password']
+  end
+
+  private
+
+  def assert_valid_user_response user_id = nil
+    parsed_resp = JSON.parse last_response.body
+
+    if user_id
+      assert_equal @user.id, parsed_resp['id']
+    else
+      refute_nil parsed_resp['id'], 'id should be present'
+    end
+
+    refute_nil parsed_resp['email'], 'email should be present'
   end
 end
